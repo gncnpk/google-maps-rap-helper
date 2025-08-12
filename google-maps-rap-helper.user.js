@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Maps RAP Helper
 // @namespace    https://github.com/gncnpk/google-maps-rap-helper
-// @version      0.0.5
+// @version      0.0.6
 // @description  Provides enhancements to the "Add a place" and "Edit information" screens on Google Maps.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://www.google.com/local/place/rap/*
@@ -19,7 +19,7 @@
     style.textContent = `
     .bXBVC {
       width: auto !important;
-      min-width: 660px !important;
+      min-width: 700px !important;
     }
     .VrVhlb {
       padding: 7px 0 !important;
@@ -118,7 +118,23 @@
         document.getElementsByClassName("VfPpkd-LgbsSe ksBjEc lKxP2d LQeN7 nbyAjc")[0].className = "VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-INsAgc VfPpkd-LgbsSe-OWXEXe-Bz112c-M1Soyc VfPpkd-LgbsSe-OWXEXe-dgl2Hf Rj2Mlf OLiIxf PDpWxe LQeN7 ZY937 s73B3c wF1tve Q8G3mf";
     }
 
+    function replaceMapUrl(e) {
+        let backgroundImage = e.style.backgroundImage;
+        let splitBGImgValue = backgroundImage.split("&signature")[0].split("&map_id=aca41a63adec02d5").join("").split("roadmap");
+        let newBackgroundImageUrl = `${splitBGImgValue[0]}hybrid${splitBGImgValue[1]}`
+        let splitBGImgValue2 = newBackgroundImageUrl.split("zoom=15");
+        let newBackgroundImageUrl2 = `${splitBGImgValue2[0]}zoom=18${splitBGImgValue2[1]}`
+        e.style.backgroundImage = newBackgroundImageUrl2;
+    }
+
     function SAE_removeClutteredElements() {}
+
+    function replaceValues() {
+        // Replace map imagery with hybrid
+        Array.from(document.getElementsByClassName("Mecipb")).forEach((e) => {
+            replaceMapUrl(e)
+        });
+    }
 
     function AAP_showAllFields() {
         document.getElementsByClassName("vIDuvd IXetx")[0].click()
@@ -160,11 +176,12 @@
             AAP_removeClutteredElements();
             AAP_showAllFields();
             AAP_compactElements();
+            AAP_replaceValues()
         } else if (window.location.href.includes("editv2")) {
             SAE_removeClutteredElements();
             SAE_compactElements();
             SAE_showAllSmallFields();
         }
-
+        replaceValues();
     })
 })();
