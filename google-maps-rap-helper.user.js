@@ -9,6 +9,8 @@
 // @grant        none
 // @run-at       document-start
 // @license      MIT
+// @downloadURL https://update.greasyfork.org/scripts/545479/Google%20Maps%20RAP%20Helper.user.js
+// @updateURL https://update.greasyfork.org/scripts/545479/Google%20Maps%20RAP%20Helper.meta.js
 // ==/UserScript==
 
 (function() {
