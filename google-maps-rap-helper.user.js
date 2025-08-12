@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Maps RAP Helper
 // @namespace    https://github.com/gncnpk/google-maps-rap-helper
-// @version      0.0.2
+// @version      0.0.3
 // @description  Provides enhancements to the Report a Problem workflow on Google Maps.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://www.google.com/local/place/rap/*
@@ -35,6 +35,9 @@
     .d8o5Xb.PE43zc {
       display: none !important;
     }
+    .d8o5Xb.jkFcB {
+      display: none !important;
+    }
     .VfPpkd-LgbsSe.ksBjEc.lKxP2d.LQeN7.nbyAjc {
       min-height: 0 !important;
     }
@@ -61,13 +64,29 @@
       padding-top: 5px !important;
     }
     .VfPpkd-fmcmS-yrriRe-W0vJo-fmcmS.VfPpkd-fmcmS-yrriRe-W0vJo-fmcmS-OWXEXe-Rfh2Tc-EglORb {
-      margin-top: -5px;
-      margin-bottom: 6px;
+      margin-top: -5px !important;
+      margin-bottom: 6px !important;
+    }
+    .mY1Jkc {
+      display: none !important;
+    }
+    .gpDxW .oUMFGb {
+      padding: 6px 0 !important;
+    }
+    .oFv6Y {
+      padding-top: 0 !important;
+    }
+    .iYoXh {
+      margin: auto !important;
+    }
+    .x4Mfpc {
+      margin-bottom: 0 !important;
+      margin-top: 4px !important;
     }
   `;
     document.head.appendChild(style);
 
-    function removeClutteredElements() {
+    function AAP_removeClutteredElements() {
         Array.from(document.getElementsByClassName("oUMFGb")[0].children).slice(0, 2).forEach((e) => {
             e.style = "display:none;"
         });
@@ -81,21 +100,46 @@
         document.getElementsByClassName("VfPpkd-LgbsSe ksBjEc lKxP2d LQeN7 nbyAjc")[0].className = "VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-INsAgc VfPpkd-LgbsSe-OWXEXe-Bz112c-M1Soyc VfPpkd-LgbsSe-OWXEXe-dgl2Hf Rj2Mlf OLiIxf PDpWxe LQeN7 ZY937 s73B3c wF1tve Q8G3mf";
     }
 
-    function showAllFields() {
+    function SAE_removeClutteredElements() {
+        Array.from(document.getElementsByClassName("x4Mfpc")[0].children).slice(0, 2).forEach((e) => {
+            e.style = "display: none !important";
+        })
+    }
+
+    function AAP_showAllFields() {
         document.getElementsByClassName("vIDuvd IXetx")[0].click()
 
     }
 
-    function compactElements() {
+    function AAP_compactElements() {
         let claimBusinessJSController = document.getElementsByClassName("VrVhlb Ia4Txd")[0].children[0];
         document.getElementsByClassName("VrVhlb aEENkc")[0].appendChild(claimBusinessJSController)
         claimBusinessJSController.style = "margin-left: 5px";
     }
+
+    function SAE_compactElements() {
+        Array.from(document.getElementsByClassName("VrVhlb")).slice(1, 3).forEach((e) => {
+            e.children[0].style = "display: flex !important";
+            e.children[0].children[0].style = "width: 100% !important"
+        });
+        Array.from(document.getElementsByClassName("VrVhlb")).slice(4, 5).forEach((e) => {
+            e.children[0].style = "display: flex !important";
+            e.children[0].children[0].style = "width: 100% !important"
+        });
+        Array.from(document.getElementsByClassName("VrVhlb")).slice(6, 9).forEach((e) => {
+            e.children[0].style = "display: flex !important";
+            e.children[0].children[0].style = "width: 100% !important"
+        });
+    }
     addEventListener("load", () => {
         if (window.location.href.includes("addaplace")) {
-            removeClutteredElements();
-            showAllFields();
-            compactElements();
+            AAP_removeClutteredElements();
+            AAP_showAllFields();
+            AAP_compactElements();
+        } else if (window.location.href.includes("editv2")) {
+            SAE_removeClutteredElements();
+            SAE_compactElements();
         }
+
     })
 })();
