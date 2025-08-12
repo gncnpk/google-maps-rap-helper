@@ -2,7 +2,7 @@
 // @name         Google Maps RAP Helper
 // @namespace    https://github.com/gncnpk/google-maps-rap-helper
 // @version      0.0.4
-// @description  Provides enhancements to the Report a Problem workflow on Google Maps.
+// @description  Provides enhancements to the "Add a place" and "Edit information" screens on Google Maps.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://www.google.com/local/place/rap/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=google.com/maps
