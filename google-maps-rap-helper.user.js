@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Maps RAP Helper
 // @namespace    https://github.com/gncnpk/google-maps-rap-helper
-// @version      0.0.3
+// @version      0.0.4
 // @description  Provides enhancements to the Report a Problem workflow on Google Maps.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://www.google.com/local/place/rap/*
@@ -30,7 +30,7 @@
     }
     .Fr7WSc {
       margin-top: 0 !important;
-      margin-bottom: 0 !important;
+      margin-bottom: 8px !important;
     }
     .d8o5Xb.PE43zc {
       display: none !important;
@@ -108,7 +108,14 @@
 
     function AAP_showAllFields() {
         document.getElementsByClassName("vIDuvd IXetx")[0].click()
+    }
 
+    function SAE_showAllSmallFields() {
+        Array.from(document.getElementsByClassName("VfPpkd-rOvkhd-XPtOyb-hhpA7")[0].children).forEach((e) => {
+            if (!e.className.includes("VfPpkd-rOvkhd-XPtOyb-OWXEXe-gk6SMd") && e.innerText.split("\n")[1] !== "Location") {
+                e.children[0].click();
+            }
+        })
     }
 
     function AAP_compactElements() {
@@ -139,6 +146,7 @@
         } else if (window.location.href.includes("editv2")) {
             SAE_removeClutteredElements();
             SAE_compactElements();
+            SAE_showAllSmallFields();
         }
 
     })
