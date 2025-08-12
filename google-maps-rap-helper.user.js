@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Maps RAP Helper
 // @namespace    https://github.com/gncnpk/google-maps-rap-helper
-// @version      0.0.4
+// @version      0.0.5
 // @description  Provides enhancements to the "Add a place" and "Edit information" screens on Google Maps.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://www.google.com/local/place/rap/*
@@ -80,10 +80,26 @@
     }
     .iYoXh {
       margin: auto !important;
+      margin-right: 0 !important;
+    }
+    .x4Mfpc .diaq0 {
+      display: none !important;
+    }
+    .x4Mfpc .ydfYne {
+      display: none !important;
     }
     .x4Mfpc {
       margin-bottom: 0 !important;
       margin-top: 4px !important;
+    }
+    .KGC9Kd-YBO6pd {
+      margin-left: -10px !important;
+    }
+    h2.CrxFsf {
+      display: none !important;
+    }
+    .yvieoe {
+      height: 36px !important;
     }
   `;
     document.head.appendChild(style);
@@ -102,11 +118,7 @@
         document.getElementsByClassName("VfPpkd-LgbsSe ksBjEc lKxP2d LQeN7 nbyAjc")[0].className = "VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-INsAgc VfPpkd-LgbsSe-OWXEXe-Bz112c-M1Soyc VfPpkd-LgbsSe-OWXEXe-dgl2Hf Rj2Mlf OLiIxf PDpWxe LQeN7 ZY937 s73B3c wF1tve Q8G3mf";
     }
 
-    function SAE_removeClutteredElements() {
-        Array.from(document.getElementsByClassName("x4Mfpc")[0].children).slice(0, 2).forEach((e) => {
-            e.style = "display: none !important";
-        })
-    }
+    function SAE_removeClutteredElements() {}
 
     function AAP_showAllFields() {
         document.getElementsByClassName("vIDuvd IXetx")[0].click()
@@ -139,6 +151,9 @@
             e.children[0].style = "display: flex !important";
             e.children[0].children[0].style = "width: 100% !important"
         });
+        Array.from(document.getElementsByClassName("fliwXd-OWXEXe-V67aGc KGC9Kd-YBO6pd")).forEach((e) => {
+            e.innerText = "Incorrect"
+        })
     }
     addEventListener("load", () => {
         if (window.location.href.includes("addaplace")) {
