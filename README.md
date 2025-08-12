@@ -1,2 +1,2 @@
 # google-maps-rap-helper
-Provides enhancements to the Report a Problem workflow on Google Maps.
+Provides enhancements to the "Add a place" and "Edit information" screens on Google Maps.
