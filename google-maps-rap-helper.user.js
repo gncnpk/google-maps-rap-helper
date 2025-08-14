@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Maps RAP Helper
 // @namespace    https://github.com/gncnpk/google-maps-rap-helper
-// @version      0.0.6
+// @version      0.0.7
 // @description  Provides enhancements to the "Add a place" and "Edit information" screens on Google Maps.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://www.google.com/local/place/rap/*
@@ -50,7 +50,7 @@
       margin: auto 15px !important;
     }
     .lY28cc {
-      height: 42px !important;
+      height: auto !important;
     }
     .VrVhlb.Ia4Txd {
       padding: 0 !important;
@@ -86,6 +86,15 @@
       display: none !important;
     }
     .x4Mfpc .ydfYne {
+      display: none !important;
+    }
+    .VrVhlb .ydfYne {
+      display: none !important;
+    }
+    .VrVhlb .yiBTVd.uftsZ {
+      display: none !important;
+    }
+    .VrVhlb .EwVWYd.iara9 {
       display: none !important;
     }
     .x4Mfpc {
@@ -168,20 +177,43 @@
             e.children[0].children[0].style = "width: 100% !important"
         });
         Array.from(document.getElementsByClassName("fliwXd-OWXEXe-V67aGc KGC9Kd-YBO6pd")).forEach((e) => {
-            e.innerText = "Incorrect"
+            let flagIcon = document.createElement("i");
+            flagIcon.className = "google-material-icons notranslate VfPpkd-rOvkhd-Zr1Nwf VfPpkd-rOvkhd-Zr1Nwf-OWXEXe-ssJRIf"
+            flagIcon.style = "margin-left: -15px;";
+            flagIcon.innerText = "flag";
+            flagIcon.title = "Don't know, but this is incorrect";
+            e.parentElement.appendChild(flagIcon)
+            e.remove();
         })
     }
+
+    function waitForElementAndClick(className, index = 0) {
+        const checkForElement = () => {
+            const elements = document.getElementsByClassName(className);
+
+            if (elements.length > index) {
+                elements[index].click();
+                console.log(`Clicked element: ${className}[${index}]`);
+                return;
+            }
+
+            setTimeout(checkForElement, 1000); // Check again in 1 second
+        };
+
+        checkForElement();
+    }
+
     addEventListener("load", () => {
         if (window.location.href.includes("addaplace")) {
             AAP_removeClutteredElements();
             AAP_showAllFields();
             AAP_compactElements();
-            AAP_replaceValues()
         } else if (window.location.href.includes("editv2")) {
             SAE_removeClutteredElements();
             SAE_compactElements();
             SAE_showAllSmallFields();
         }
         replaceValues();
+        waitForElementAndClick("VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe LQeN7 RorPr AQz7gc sspfN s73B3c gopkhf", 0);
     })
 })();
